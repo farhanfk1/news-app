@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:news_app/models/article_model.dart';
 import 'package:news_app/models/category_model.dart';
 import 'package:news_app/models/slider_model.dart';
+import 'package:news_app/pages/all_news.dart';
 import 'package:news_app/pages/article_view.dart';
+import 'package:news_app/pages/category_news.dart';
 import 'package:news_app/services/data.dart';
 import 'package:news_app/services/news.dart';
 import 'package:news_app/services/slider_data.dart';
@@ -94,11 +96,16 @@ class _HomeState extends State<Home> {
                     fontSize: 20
                     ),
                      ),
-                       Text("View All!", style:  TextStyle(color: Colors.blue,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16
-                    ),
-                     ),
+                       GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>AllNews(news: "Breaking")));
+                        },
+                         child: Text("View All!", style:  TextStyle(color: Colors.blue,
+                                             fontWeight: FontWeight.w500,
+                                             fontSize: 16
+                                             ),
+                                              ),
+                       ),
                   ],
                 ),
               ),
@@ -135,11 +142,16 @@ class _HomeState extends State<Home> {
                     fontSize: 20
                     ),
                      ),
-                       Text("View All!", style:  TextStyle(color: Colors.blue,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16
-                    ),
-                     ),
+                       GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>AllNews(news: "Trending")));
+                        },
+                         child: Text("View All!", style:  TextStyle(color: Colors.blue,
+                                             fontWeight: FontWeight.w500,
+                                             fontSize: 16
+                                             ),
+                                              ),
+                       ),
                   ],
                 ),
               ),
@@ -254,31 +266,35 @@ class CateogryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 16),
-      child: Stack(
-        
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(6),
-            child: Image.asset(image,
-             width: 120,
-              height: 60, fit: BoxFit.cover,),
-          ),
-          Container(
-              width: 120,
-              height: 70,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
-                color: Colors.black26,
-              ),
-            child: Center(child: Text(categoryName, style: TextStyle(
-              color: Colors.white,
-              fontSize: 15,fontWeight: FontWeight.bold,
-              )
-              ,)),
-          )
-        ],
+    return GestureDetector(onTap: (){
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> CategoryNews(name: categoryName)));
+    },
+      child: Container(
+        margin: EdgeInsets.only(right: 16),
+        child: Stack(
+          
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(6),
+              child: Image.asset(image,
+               width: 120,
+                height: 60, fit: BoxFit.cover,),
+            ),
+            Container(
+                width: 120,
+                height: 70,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  color: Colors.black26,
+                ),
+              child: Center(child: Text(categoryName, style: TextStyle(
+                color: Colors.white,
+                fontSize: 15,fontWeight: FontWeight.bold,
+                )
+                ,)),
+            )
+          ],
+        ),
       ),
     );
   }
